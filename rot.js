@@ -42,8 +42,11 @@
 		var currentPosition;
 		var shiftedPosition;
 		while (++index < length) {
-			character = string.charAt(index);
-			if (regexLowercase.test(character)) {
+			// line breaks are \n, let's check first that option
+			if(character === 'n' && string.charAt(index - 1) === '\\' ){
+				result += character;
+			}
+			else if (regexLowercase.test(character)) {
 				currentPosition = lowercase.indexOf(character);
 				shiftedPosition = (currentPosition + n) % 26;
 				result += lowercase.charAt(shiftedPosition);
